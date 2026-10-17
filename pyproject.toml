@@ -1,0 +1,86 @@
+[project]
+name = "dagster-elt-template"
+version = "0.1.0"
+description = "Dagster-based template for converting PDFs and DOCX files into clean, ingestible markdown."
+readme = "README.md"
+requires-python = ">=3.12"
+
+# ---------------------------------------------------------------------------
+# Pinned: format-conversion deps.
+#
+# These produce content that flows directly into data/clean/. Their output
+# shifts between versions (PDF→MD parsing, DOCX→MD conversion), so we pin
+# to exact versions and only bump when we deliberately re-run the pipeline
+# to absorb the change. Dependabot (see .github/dependabot.yml) batches
+# them into a single "conversion-pinned" PR so the bump is a deliberate
+# choice, not drift.
+# ---------------------------------------------------------------------------
+# Loose: orchestration. Rolled forward on an ongoing basis by dependabot.
+# Ponytail: `>=` lets these roll forward without ceremony; pin when a
+# specific release actually breaks something.
+# ---------------------------------------------------------------------------
+dependencies = [
+    "pymupdf4llm==1.27.2.3",
+    "markitdown[docx]==0.1.4",
+
+    "dagster>=1.13.9",
+    "dagster-dg-cli>=1.13.9",
+    "dagster-webserver>=1.13.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "ruff>=0.15.16",
+    "ty>=0.0.44",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff — linter + formatter
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "TC",   # flake8-type-checking (moves TYPE_CHECKING imports)
+    "ANN",  # flake8-annotations (require type hints)
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "ANN401",  # use of Any is sometimes intentional
+    "E501",    # line too long — formatter handles this
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN"]  # test fixtures + parametrize don't benefit from full annotation
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# ---------------------------------------------------------------------------
+# Dagster — code location discovery
+# ---------------------------------------------------------------------------
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "pipeline"
+
+[tool.dagster]
+module_name = "pipeline.definitions"
+
+# ---------------------------------------------------------------------------
+# ty — type checker
+# ---------------------------------------------------------------------------
+[tool.ty]
+# All rules default to "error"; no downgrades — keep pre-commit strict.

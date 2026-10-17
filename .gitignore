@@ -1,0 +1,50 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Dagster runtime home (runs, logs, event store) — keep only the config file
+.dagster/*
+!.dagster/dagster.yaml
+
+# Dagster ephemeral temp homes (created when DAGSTER_HOME is unset)
+.tmp_dagster*/
+
+# Raw source layer — written by ingestors, never read by consumers
+data/sources/
+
+# ...except the normalized clean layer (canonical source for all consumers)
+!data/clean/
+!data/clean/**
+
+# Personal todo file
+TASKLIST.md
+
+# Local-only direnv overrides (sourced by .envrc if present)
+.envrc.local
+
+# IDE / agent state
+.idea/
+.vscode/
+.DS_Store
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+.beads/proxieddb/
+
+# Pyright / ty caches
+.ty_cache/
+.pyright_cache/
+.mypy_cache/
+
+# Pytest / ruff caches
+.pytest_cache/
+.ruff_cache/

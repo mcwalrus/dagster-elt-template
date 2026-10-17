@@ -1,0 +1,44 @@
+# Dependabot — weekly review of Python dependencies.
+#
+# Strategy:
+#   - "conversion-pinned" group is the only one expected to be reviewed by
+#     hand: pymupdf4llm, markitdown are pinned to exact versions in
+#     pyproject.toml because their output flows directly into data/clean/.
+#     Bumping them re-bakes every markdown artefact, so it is a deliberate
+#     choice, not an automatic merge.
+#   - All other groups (orchestration, dev) use `>=` in pyproject.toml and
+#     can roll forward on their own cadence.
+
+version: 2
+
+updates:
+  # -----------------------------------------------------------------------
+  # Python — pyproject.toml at repo root
+  # -----------------------------------------------------------------------
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Pacific/Auckland"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+    groups:
+      conversion-pinned:
+        patterns:
+          - "pymupdf4llm"
+          - "markitdown"
+      orchestration:
+        patterns:
+          - "dagster"
+          - "dagster-dg-cli"
+          - "dagster-webserver"
+      dev:
+        dependency-type: "development"
+        patterns:
+          - "pytest"
+          - "ruff"
+          - "ty"

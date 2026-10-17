@@ -1,0 +1,13 @@
+# Brewfile — Homebrew dependencies for the dagster-elt-template project
+# Run directly:  brew bundle --file=scripts/Brewfile
+# Or via setup:  ./scripts/setup.sh
+
+# ── Shell / environment ───────────────────────────────────────────────────────
+brew "direnv"       # Per-directory env vars (.envrc); hooks into your shell
+
+# ── Python ────────────────────────────────────────────────────────────────────
+brew "uv"           # Fast Python package & project manager (reads .python-version)
+
+# ── Task running & git hooks ──────────────────────────────────────────────────
+brew "just"         # Command runner — see justfile for available tasks
+brew "lefthook"     # Git hook manager (pre-commit: ruff, ty)
