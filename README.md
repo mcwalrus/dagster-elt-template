@@ -1,5 +1,7 @@
 # dagster-elt-template
 
+[![Use this template](https://img.shields.io/badge/Use%20this-template-2ea44f?logo=github)](https://github.com/mcwalrus/dagster-elt-template/generate)
+[![GitHub](https://img.shields.io/badge/github-mcwalrus%2Fdagster--elt--template-181717?logo=github)](https://github.com/mcwalrus/dagster-elt-template)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org)
 [![Dagster pipeline](https://img.shields.io/badge/orchestration-Dagster-5e30a8)](https://dagster.io)
@@ -22,6 +24,13 @@ Use this template when you want to:
 See [LICENSE](LICENSE) for terms.
 
 ## Quickstart
+
+This is a [GitHub template repository](https://github.com/mcwalrus/dagster-elt-template) —
+click **Use this template** on GitHub to create your own copy, or clone it directly:
+
+```bash
+gh repo create my-project --template mcwalrus/dagster-elt-template --public --clone
+```
 
 Requires macOS or Linux, [Homebrew](https://brew.sh), and Python 3.12+.
 

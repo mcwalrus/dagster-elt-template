@@ -5,6 +5,10 @@ description = "Dagster-based template for converting PDFs and DOCX files into cl
 readme = "README.md"
 requires-python = ">=3.12"
 
+[project.urls]
+Repository = "https://github.com/mcwalrus/dagster-elt-template"
+Template = "https://github.com/mcwalrus/dagster-elt-template/generate"
+
 # ---------------------------------------------------------------------------
 # Pinned: format-conversion deps.
 #
